@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Class Activity 2</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+  <link rel="stylesheet" href="wts.css">
+  <link rel="icon" type="image/x-icon" href="Logo_last.png">
+</head>
+<body>
+  <audio id="cheers" >
+    <source src="cheers.mp3" type="audio/mpeg">
+  </audio>
+  <audio id="points" src="Points.mp3"></audio>
+  <audio id="fail" src="fail.mp3"></audio>
+  <div class="header" style="width:100%; box-shadow:5px 5px 10px rgb(0, 0, 0); padding-bottom:10px;">
+    <img src="Logo.png" width="5%" style="float:left; margin-top:25px;" class="img-responsive">
+    <span> <img src="header.png" width="30%" height="100px" class="img-responsive"></span>
+</div>
+<br>
+<br>
+  <center>
+  <h1 id="heading">Place Value</h1>
+  <div class="maindiv container">
+    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 imgdiv">
+      <img id ="math_ques" src="MAth Question.jpg" width="100%">
+    </div>
+  <div id="questiondiv" class="col-lg-7 col-md-7 col-sm-7 col-xs-8">
+    <div id="question"></div>
+    <br><br><br>
+  <div class="menu"><br><ul id="options"></ul></div>
+  <button id="subbtn" class="btn btn-success" onclick="checkAnswer()">Submit Answer</button>
+  <button id="nextbtn" class="btn btn-primary" onclick="newques()" style="display:none">Next</button>
+  <p id="result"></p>
+  </div>
+</div>
+  <script>
+    // Define an array of questions and their options
+    var questions = [
+    
+    {
+      question: "Q 1. What is the place value of the digits 2 and 7 in the number 29975 when Fishy is exploring the ocean?",
+      options: ["Two Thousand,  Seventy", "Two Thousand, Seventy", "Two Hundred, Seventy", "Two Thousand and Seventy"],
+      answer: "Two Thousand and Seventy"
+    },
+
+    {
+      question: "Q 2. Fill in the blanks: (i) 20000 + ____ + 600 + 30 + 5 = 28635.To complete the equation, Fishy needs to find the missing number to make it correct.",
+
+      options: ["8600", "86000", "8000", "800"],
+      answer: "8000"
+    },
+
+    {
+      question: "Q 3. What is the place value of 2 in 80942940:",
+      options: ["2", "3000", "2000", "20000"],
+      answer: "2000"
+    },
+
+    
+    {
+      question: "Q 4. Fishy wants to identify a number which has 4 in tens place and 8 in thousands place. The digit at ones place is half of the digit at tens place and the digit at hundreds place is two less than the digit in ones place. Find the number.",
+
+      options: ["8046", "8042", "8246", "8146"],
+      answer: "8042"
+    },
+
+    {
+      question: "Q 5. When Fishy explores the underwater world, what is the sum of the face value and place value of the digit 6 in the number 86245?",
+
+      options: ["60,12", "6,006", "60,06", "60,60"],
+      answer: "6,006"
+    },
+
+    {
+      question: "Q 6. The difference in the place values of the two 6s in the number 14268637 is",
+
+      options: ["59400", "5940", "60600", "12"],
+      answer: "59400"
+    },
+
+      {
+        question: "Q 7. When Fishy is exploring the ocean, which of the following is the largest 5-digit number where 7 is at the ones place?",
+
+        options: ["65432", "66427", "87457", "61234"],
+        answer: "66427"
+      },
+
+      {
+        question: "Q 8. While exploring the ocean, Fishy discovers a group of numbers. Which of the following is the largest 5-digit number where 9 is at the tens place?",
+
+        options: ["98775", "89592", "74993", "93771"],
+        answer: "89592"
+      },
+
+      {
+        question: "Q 9. Which of the following numbers has 8 in its thousands place ?",
+
+        options: ["756.218", "3.682","821.053","46.809"],
+        answer: "756.218"
+      },
+
+      {
+        question: "Q 10. The number 315233729 can be written in International system as _________",
+
+        options: ["Three hundred fifteen million, two hundred thirty-three thousand, seven hundred twenty-nine.",
+                  "Thirty-one crores, fifty-two lakhs, thirty-three thousand, seven hundred and twenty-nine.",
+                  "Three one five lakhs, two three thousand, seven hundred and twenty-nine.",
+                  "Three hundred fifteen million."],
+        answer: "Three hundred fifteen million, two hundred thirty-three thousand, seven hundred twenty-nine."
+      },
+
+      {
+        question: "Q 11. Fishy is swimming near the shipwreck and sees the number 2. What is the place value of 2 in the number 7291.26?",
+
+
+        options: ["Ones", "Tens", "Tenths", "Hundreds"],
+        answer: "Tenths"
+      },
+
+      {
+        question: "Q 12. As Fishy explores a sunken treasure chest, he sees the number 7. What is the place value of 7 in the number 2187.32?",
+
+
+        options: ["Seven","Seven Tens","Seven Thousandths","Seven Hundreds"],
+        answer: "Seven"
+      },
+
+      {
+        question: "Q 13. Swimming through a colorful coral reef, Fishy finds a big number 984.2675. What is the face value of 9 in the number 984.2675?",
+
+        options: ["9", "90", "900", "9000"],
+        answer: "9"
+      },
+
+      {
+        question: "Q 14. Near a beautiful underwater garden, Fishy discovers the number. Can you identify what number is this?",
+
+
+        options: ["168.509", "861.905", "861905", "None of these"],
+        answer: "861.905"
+      },
+
+      {
+        question: "Q 15. 5,640,109 can be written in the International system as:",
+        options: ["Five million six hundred forty thousand one hundred and nine.",
+                  "Five million six hundred forty thousand one hundred.",
+                  "Five million six hundred forty thousand one hundred and seven.",
+                  "Five million six hundred forty one hundred and nine."],
+        answer: "Five million six hundred forty thousand one hundred and nine."
+      },
+
+      {
+        question: "Q 16. While exploring a shipwreck, Fishy finds the number 82946517. What is the correct way to write this number using commas?",
+
+        options: ["82,946,517", "8,294,6517", "829,465,17", "82,9465,17"],
+        answer: "82,946,517"
+      },
+
+      {
+        question: "Q 17. Fishy wants to write the number 89.351 in expanded form. Can you guess the right option",
+
+        options: ["(a)","(b)","(c)","(d)"],
+        answer: "(d)"
+      },
+
+      {
+        question: "Q 18. In a mysterious underwater cave, Fishy discovers a number. The digit in the tens place is 5, and the digit in the thousands place is 2. The digit in the ones place is 3 less than the digit in the tens place. The digit in the ten thousands place is 2 more than the digit in the hundreds place. If the digit in the hundreds place is 4, find the number.",
+
+        options: ["62425", "62542","62452","64452"],
+        answer: "62452"
+      },
+
+      {
+        question: "Q 19. In a hidden treasure chest deep underwater, Fishy discovers a decimal number. The digit in the tenths place is 7, and the digit in the thousandths place is 4. The digit in the hundredths place is 2 less than the digit in the tenths place. The digit in the ten thousandths place is 1 more than the digit in the hundredths place. Find the number.",
+
+        options: ["0.7546","7.7546","70.546","400.756"],
+        answer: "0.7546"
+      },
+
+      {
+        question: "Q 20. Fishy caught 123 fish in the morning and 456 fish in the afternoon. How many fish did Fishy catch in total?Express the number in words",
+
+
+        options: ["One hundred twenty-three", 
+                  "Four hundred fifty-six",
+                  "Five hundred seventy-nine",
+                  "Five hundred seventy-nine thousand"],
+        answer: "Five hundred seventy-nine"
+      },
+
+
+      {
+        question: "Q 21.  Five hundred fifty-eight million eight hundred ninety-four thousand nine hundred thirty-nine is:",
+
+        options: ["558,894,939","558,894,93","558,899,939","568,894,939"],
+        answer: "558,894,939"
+      },
+
+      {
+        question: "Q 22.  Write the decimal number 1818.8542 in words.",
+
+        options: ["One thousand eight hundred eighteen and eight hundred fifty four thousandths",
+                  "One thousand eight hundred eighteen point eight thousand five hundred forty",
+                  "One thousand eight hundred eighteen and eight hundred fifty four hundredths",
+                  "One thousand eight hundred eighteen and eight hundred fifty four tenths"],
+        answer: "One thousand eight hundred eighteen and eight hundred fifty four thousandths"
+      },
+
+      {
+        question: "Q 23.  Write the short form of the number given in picture:",
+
+        options: ["743461","743.164","743.461","70043.461"],
+        answer: "743.461"
+      },
+
+
+      {
+        question: "Q 24.  Compare the place value of 7 in 7980 with the place value of 7 in 9750 using >, = or <  symbols",
+
+        options: [">","<","="],
+        answer: ">"
+      },
+
+
+
+
+   
+
+
+      
+
+     
+
+     
+
+
+     
+
+     
+
+
+   
+
+
+      
+      // Add more questions here
+    ];
+
+    //define the array of images
+
+    var img= ["Assets/1.jpg","Assets/2.jpg","Assets/3.jpg","Assets/4.jpg","Assets/5.jpg","Assets/6.jpg","Assets/7.jpg","Assets/8.jpg","Assets/9.jpg","Assets/10.jpg","Assets/11.jpg","Assets/12.jpg","Assets/13.jpg","Assets/14.jpg","Assets/15.jpg","Assets/16.jpg","Assets/17.jpg","Assets/18.jpg","Assets/19.jpg","Assets/20.jpg","Assets/21.jpg"]
+    
+    // Get a random question from the array
+
+    var randomQuestion = questions[0];
+    var updatedimage = img[0]
+    document.getElementById("math_ques").src = updatedimage
+    document.getElementById("question").innerHTML = randomQuestion.question;
+    
+    randomQuestion.options.forEach(function(option) {
+      var li = document.createElement("li");
+      li.innerHTML = '<input type="radio" name="answer" value="' + option + '"> ' + option;
+      document.getElementById("options").appendChild(li);
+    });
+
+// Create a function here like family array project of Byjus to display next question \
+    // from array everytime instead of random question
+    var i=1;
+    var count=questions.length
+    function newques(){
+      if(i==count){
+        document.getElementById("heading").innerHTML = "Thank You...."
+        document.getElementById("math_ques").src = "last.jpg"
+        document.getElementById("question").innerHTML=""
+        document.getElementById("options").innerHTML="Well Done <br>  As the lesson ended, Fishy swam off into the ocean, eager to explore more and apply his newfound knowledge to solve mathematical puzzles with ease."
+        document.getElementById("cheers").play()
+        document.getElementById("result").innerHTML ="Click on the next button on the top right corner to practice more"
+      document.getElementById("nextbtn").style.display="none"
+      }
+      else{
+
+      document.getElementById("options").innerHTML=""
+      document.getElementById("result").innerHTML =""
+      
+  
+      updatedimage= img[i]
+      document.getElementById("math_ques").src = updatedimage
+
+// Display the question and options on the page
+      randomQuestion = questions[i];    
+    document.getElementById("question").innerHTML = randomQuestion.question;
+    
+    
+    randomQuestion.options.forEach(function(option) {
+      var li = document.createElement("li");
+      li.innerHTML = '<input type="radio" name="answer" value="' + option + '"> ' + option;
+      document.getElementById("options").appendChild(li);
+    });
+    document.getElementById("subbtn").style.display="inline-block"
+        document.getElementById("nextbtn").style.display="none"
+
+    i++;
+    }
+  }
+    
+    
+    // Check the selected answer against the correct answer
+    function checkAnswer() {
+      var selectedAnswer = document.querySelector('input[name="answer"]:checked').value;
+      if (selectedAnswer === randomQuestion.answer) {
+        document.getElementById("result").innerHTML = "Good Job! &#128512" ;
+        document.getElementById("points").play();
+        document.getElementById("subbtn").style.display="none"
+        document.getElementById("nextbtn").style.display="inline-block"
+      } else {
+        document.getElementById("result").innerHTML = "Try Again 😎!";
+        document.getElementById("fail").play();
+      }
+    }
+  </script>
+</center>
+</body>
+</html>
